@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>VA1.2_HW2</title>
+  </head>
+
+  <body>
+    <div>
+      <label for="countryInput">Enter your country:</label>
+      <input type="text" id="countryInput"/>
+      <button id="countryButton">Display country</button>
+      <p id="countryResult"></p>
+    </div>
+    <div>
+      <label for="headingInput">Enter a website name:</label>
+      <input type="text" id="headingInput"/>
+      <button id="headingButton">Display Heading</button>
+      <p id="headingResult"></p>
+    </div>
+    <div>
+      <label for="responseInput">Are you a student?</label>
+      <input type="text" id="responseInput"/>
+      <button id="responseButton">Display Response</button>
+      <p id="responseResult"></p>
+    </div>
+    <div>
+      <label for="ageInput">Enter your age:</label>
+      <input type="number" id="ageInput"/>
+      <button id="checkAgeButton">Check Age</button>
+      <p id="checkAgeResult"></p>
+    </div>
+
+    <script>
+      const country = document.getElementById("countryInput")
+      const countryButton = document.getElementById("countryButton")
+      const countryResult = document.getElementById("countryResult")
+      countryButton.addEventListener("click", function(){
+        countryResult.textContent = `Your country: ${country.value}`
+      })
+
+      const heading = document.getElementById("headingInput")
+      const headingButton = document.getElementById("headingButton")
+      const headingResult = document.getElementById("headingResult")
+      headingButton.addEventListener("click", function(){
+        headingResult.innerHTML = `<strong>${heading.value}</strong>`
+      })
+
+      const response = document.getElementById("responseInput")
+      const responseButton = document.getElementById("responseButton")
+      const responseResult = document.getElementById("responseResult")
+      responseButton.addEventListener("click", function(){
+        if(response.value.toLowerCase() === "yes"){
+          responseResult.textContent = `You are a student.`
+        }
+        else if(response.value.toLowerCase() === "no"){
+          responseResult.textContent = `You are not a student.`
+        }
+        else{
+          responseResult.textContent = `Invalid response. Please enter 'Yes' or 'No'`
+        }
+      })
+
+      const age = document.getElementById("ageInput")
+      const checkAgeButton = document.getElementById("checkAgeButton")
+      const checkAgeResult = document.getElementById("checkAgeResult")
+      checkAgeButton.addEventListener("click", function(){
+        if(age.value > 18){
+          checkAgeResult.textContent = `You are an adult.`
+        }
+        else{
+          checkAgeResult.textContent = `You are a minor.`
+        }
+      })
+    </script>
+  </body>
+</html>

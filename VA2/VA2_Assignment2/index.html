@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>User Waitlist Form</h1>
+  <form id="waitlistForm">
+    <label for="fullName"><strong>Full Name: </strong></label>
+    <input type="text" id="fullName"/>
+    <br><br>
+    <label for="phoneNumber"><strong>Phone Number: </strong></label>
+    <input type="number" id="phoneNumber"/>
+    <br><br>
+    <label for="email"><strong>Email ID: </strong></label>
+    <input type="email" id="email"/>
+    <br><br>
+    <label><strong>Gender: </strong></label><br>
+    <label><input type="radio" name="gender" value="Male"/>Male</label><br>
+    <label><input type="radio" name="gender" value="Female"/>Female</label><br>
+    <label><input type="radio" name="gender" value="Other"/>Other</label>
+    <br><br>
+    <label><strong>Are you a College Graduate?: </strong></label><br>
+    <label><input type="radio" name="isGraduate" value="Yes"/>Yes</label><br>
+    <label><input type="radio" name="isGraduate" value="No"/>No</label><br>
+    <label><input type="radio" name="isGraduate" value="Dropout"/>Dropout</label>
+    <br><br>
+    <label for="work"><strong>Are you working full-time or part-time?: </strong></label>
+    <select id="work" >
+      <option value="Working Full Time">Working Full Time</option>
+      <option value="Working Part Time">Working Part Time</option>
+      <option value="Not Working Anywhere">Not Working Anywhere</option>
+    </select>
+    <br><br>
+    <label for="whyWebDeb"><strong>Why do you want to learn Web Development?: </strong></label><br>
+    <textarea id="whyWebDev" cols="50" rows="5"></textarea>
+    <br><br>
+    <label><strong>How did you come to know about us?: </strong></label><br>
+    <label><input type="checkbox" name="aboutUs" value="Friends"/>Friends</label><br>
+    <label><input type="checkbox" name="aboutUs" value="Youtube"/>Youtube</label><br>
+    <label><input type="checkbox" name="aboutUs" value="Instagram"/>Instagram</label><br>
+    <label><input type="checkbox" name="aboutUs" value="Linkedin"/>Linkedin</label><br>
+    <label><input type="checkbox" name="aboutUs" value="Other"/>Other</label>
+    <br><br>
+    <label><strong><input type="checkbox" id="agreeToTerms"/>I confirm that all the information in the form is true.</strong></label>
+    <br><br>
+    <input type="submit" value="Submit Details"/>
+  </form>
+  <p id="submittedDetails"></p>
+
+  <script>
+    const waitlistForm = document.getElementById("waitlistForm")
+    waitlistForm.addEventListener("submit", function(e){
+      e.preventDefault()
+      const fullName = document.getElementById("fullName").value
+      const phoneNumber = document.getElementById("phoneNumber").value
+      const email = document.getElementById("email").value
+      const gender = document.querySelector('input[name="gender"]:checked').value
+      const isGraduate = document.querySelector('input[name="isGraduate"]:checked').value
+      const work = document.getElementById("work").value
+      const whyWebDev = document.getElementById("whyWebDev").value
+      const aboutUs = document.querySelectorAll('input[name="aboutUs"]:checked')
+      let selectedAboutUs = []
+      for(let i = 0; i < aboutUs.length; i++){
+        selectedAboutUs.push(aboutUs[i].value)
+      }
+
+      const agreeToTerms = document.getElementById("agreeToTerms")
+      const submittedDetails = document.getElementById("submittedDetails")
+      if(agreeToTerms.checked){
+        const details = `<h2>Submitted Details: </h2>
+          <p><strong>Name: </strong>${fullName}</p>
+          <p><strong>Phone Number: </strong>${phoneNumber}</p>
+          <p><strong>Email ID: </strong>${email}</p>
+          <p><strong>Gender: </strong>${gender}</p>
+          <p><strong>Are you a College Graduate?: </strong>${isGraduate}</p>
+          <p><strong>Are you working anywhere full-time or part-time?: </strong>${work}</p>
+          <p><strong>Why do you want to learn web development?: </strong>${whyWebDev}</p>
+          <p><strong>How did you come to know about us?: </strong>${selectedAboutUs.join(", ")}</p>`
+        submittedDetails.innerHTML = details
+      }
+      else{
+        submittedDetails.textContent = `Please agree to the terms and conditions.`
+      }
+    })
+  </script>
+</body>
+
+</html>

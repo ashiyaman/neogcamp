@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <label>Choose a movie genre: </label>
+  <select id="selectMovieGenre">
+    <option value="Comedy">Comedy</option>
+    <option value="Action">Action</option>
+    <option value="Drama">Drama</option>
+  </select>
+  <p id="movieGenreResult"></p>
+
+  <label>Select a weather condition: </label>
+  <select id="selectWeather">
+    <option value="Snowy">Snowy</option>
+    <option value="Rainy">Rainy</option>
+    <option value="Sunny">Sunny</option>
+  </select>
+  <p id="weatherResult"></p>
+
+  <label>Select a language: </label>
+  <select id="selectLanguage">
+    <option value="english">English</option>
+    <option value="french">French</option>
+    <option value="spanish">Spanish</option>
+  </select>
+  <button id="displayGreetingBtn">Display Greeting</button>
+  <p id="greetingResult"></p>
+
+  <label>Choose a musical instrument: </label>
+  <select id="selectInstrument">
+    <option value="violin">Violin</option>
+    <option value="guitar">Guitar</option>
+    <option value="piano">Piano</option>
+  </select>
+  <button id="displayFunFactBtn">Display Fun Fact</button>
+  <p id="funFactResult"></p>
+  
+  <script>
+    const selectMovieGenre = document.getElementById("selectMovieGenre")
+    const movieGenreResult = document.getElementById("movieGenreResult")
+    selectMovieGenre.addEventListener("change", function(){
+      const selectedGenre = selectMovieGenre.value
+      const movies = {
+        Comedy: "superbad",
+        Action: "The Dark Knight",
+        Drama: "The Shawshank Redemption"        
+      }
+      movieGenreResult.textContent = `Recommended ${selectedGenre} movie: ${movies[selectedGenre]}`
+    })
+
+    const selectWeather = document.getElementById("selectWeather")
+    const weatherResult = document.getElementById("weatherResult")
+    selectWeather.addEventListener("change", function(){
+      const activities = {
+        Snowy: "Build a snowman",
+        Rainy: "Indoor treasure hunt",
+        Sunny: "Visit beach or park"
+      }
+      const selectedWeather = selectWeather.value
+      if(selectedWeather === "Sunny"){
+        weatherResult.textContent = `Outdoor activity suggestion: ${activities[selectedWeather]}`
+      }
+      else{
+        weatherResult.textContent = `Indoor activity suggestion: ${activities[selectedWeather]}`
+      }
+    })
+
+    const languages = document.getElementById("selectLanguage")
+    const displayGreetingBtn = document.getElementById("displayGreetingBtn")
+    const greetingResult = document.getElementById("greetingResult")
+    displayGreetingBtn.addEventListener("click", function(){
+      const selectedLanguage = languages.value
+      const greetings = {
+        english: "Hello!",
+        french: "Bonjour!",
+        spanish: "Hola!"
+      }
+      greetingResult.textContent = `Common greeting: ${greetings[selectedLanguage]}`
+    })
+
+    const instruments = document.getElementById("selectInstrument")
+    const displayFunFactBtn = document.getElementById("displayFunFactBtn")
+    const funFactResult = document.getElementById("funFactResult")
+    displayFunFactBtn.addEventListener("click", function(){
+      const selectedInstrument = instruments.value
+      const funFact = {
+        violin: "The violin is an instrument known for its sweet sound.",
+        guitar: "The guitar is one of the most famous instrument in the world.",
+        piano: "The piano has 88 keys."
+      }
+      funFactResult.textContent = funFact[selectedInstrument]
+    })
+  </script>
+</body>
+
+</html>

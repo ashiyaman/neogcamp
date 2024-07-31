@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <label>Select a color: </label>
+  <select id="selectColor">
+    <option value="red">Red</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+  </select>
+  <p id="selectedColorResult"></p>
+
+  <label>Select a day: </label>
+  <select id="selectDay">
+    <option value="sunday">Sunday</option>
+    <option value="monday">Monday</option>
+    <option value="tuesday">Tuesday</option>
+    <option value="wednesday">Wednesday</option>
+    <option value="thursday">Thursday</option>
+    <option value="friday">Friday</option>
+    <option value="saturday">Saturday</option>
+  </select>
+  <p id="selectedDayResult"></p>
+
+  <label>Choose a country: </label>
+  <select id="selectCountry">
+    <option value="usa">USA</option>
+    <option value="india">India</option>
+    <option value="australia">Australia</option>
+  </select>
+  <p id="selectedCountryResult"></p>
+  
+  <script>
+    const colorSelect = document.getElementById("selectColor")
+    const selectedColorResult = document.getElementById("selectedColorResult")
+    colorSelect.addEventListener("change", function(){
+      const selectedColor = colorSelect.value
+      selectedColorResult.textContent = `You selected: ${selectedColor}`
+    })
+
+      const daySelect = document.getElementById("selectDay")
+      const selctedDayResult = document.getElementById("selectedDayResult")
+      daySelect.addEventListener("change", function(){
+      const selectedDay = selectDay.value
+      if(selectedDay === "sunday" || selectedDay === "saturday"){
+        selctedDayResult.textContent = `It is a weekend.`
+      }
+      else{
+        selectedDayResult.textContent = `It is a weekday.`
+      }
+    })
+
+    const countrySelect = document.getElementById("selectCountry")
+    const selectedCountryResult = document.getElementById("selectedCountryResult")
+    countrySelect.addEventListener("change", function(){
+      const selectedCountry = countrySelect.value
+      const capitals = {
+        usa: "Washington D.C",
+        india: "Delhi",
+        australia: "Canberra"
+      }
+      selectedCountryResult.textContent = `Capital: ${capitals[selectedCountry]}`
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Product Order Form</h1>
+
+  <form id="productOrderForm">
+    <label for="productName">Product Name: </label>
+    <select id="productName">
+      <option value="ProductA">Product A</option>
+      <option value="ProductB">Product B</option>
+      <option value="ProductC">Product C</option>
+    </select>
+    <br><br>
+    <label for="quantity">Quantity: </label>
+    <input type="number" id="quantity"/>
+    <br><br>
+    <label for="shippingAddress">Shipping Address: </label>
+    <br>
+    <textarea id="shippingAddress" cols="50" rows="5"></textarea>
+    <br><br>
+    <label>Payment Method:</label><br>
+    <label><input type="radio" name="paymentMethod" value="Credit Card"/>Credit Card</label><br>
+    <label><input type="radio" name="paymentMethod" value="Paypal"/>Paypal</label><br>
+    <label><input type="radio" name="paymentMethod" value="Bank Transfer"/>Bank Transfer</label>
+    <br><br>
+    <label for="deliverySpeed">Delivery Speed:</label>
+    <select id="deliverySpeed">
+      <option value="Standard">Standard</option>
+      <option value="Express">Express</option>
+      <option value="Same Day">Same Day</option>
+    </select>
+    <br><br>
+    <input type="submit" value="Place Order"/>
+  </form>
+  <p id="orderDetails"></p>
+  
+  <script>
+    const productOrderForm = document.getElementById("productOrderForm")
+    productOrderForm.addEventListener("submit", function(event){
+      event.preventDefault()
+      const productName = document.getElementById("productName").value
+      const quantity = document.getElementById("quantity").value
+      const address = document.getElementById("shippingAddress").value
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value
+      const deliverySpeed = document.getElementById("deliverySpeed").value
+
+      const orderDetails = document.getElementById("orderDetails")
+      const placedOrder = `<h2>Order Details</h2>
+        <p><strong>Product Name: </strong>${productName}</p>
+        <p><strong>Quantity: </strong>${quantity}</p>
+        <p><strong>Shipping Address: </strong>${address}</p>
+        <p><strong>Payment Method: </strong>${paymentMethod}</p>
+        <p><strong>Delivery Speed: </strong>${deliverySpeed}</p>`
+      orderDetails.innerHTML = placedOrder
+    })
+  </script>
+</body>
+
+</html>

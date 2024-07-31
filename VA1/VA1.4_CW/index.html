@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <label for="nameInput">Enter you name: </label>
+  <input type="text" id="nameInput"/>
+  <button id="showNameButton">Show Name</button>
+  <p id="showNameResult"></p>
+  <button id="styleBtn">Change Style</button>
+
+  <script>
+    const name = document.querySelector("#nameInput")
+    const showNameButton = document.querySelector("#showNameButton")
+    const showNameResult = document.querySelector("#showNameResult")
+    const changeStyleBtn = document.querySelector("#styleBtn")
+    showNameButton.addEventListener("click", function(){
+      showNameResult.textContent = `Your name: ${name.value}`
+    })
+    changeStyleBtn.addEventListener("click", function(){
+      showNameResult.style.color = "green"
+      showNameResult.style.backgroundColor = "yellow"
+    })
+  </script>
+</body>
+
+</html>

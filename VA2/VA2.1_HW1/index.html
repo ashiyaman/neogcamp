@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <label for="sportsInput">Program 1: Select multiple sports:</label>
+  <input type="checkbox" name="sports" value="Soccer"/>Soccer
+  <input type="checkbox" name="sports" value="Tennis"/>Tennis
+  <input type="checkbox" name="sports" value="Basketball"/>Basketball
+  <button type="button" id="displaySportsBtn">Display Selected Sports</button>
+  <p id="sportsResult"></p>
+
+  <label for="destinationsInput">Program 2: Choose multiple vacation destinations: </label>
+  <input type="checkbox" name="places" value="city"/>City
+  <input type="checkbox" name="places" value="beach"/>Beach
+  <input type="checkbox" name="places" value="mountains"/>Mountains
+  <button type="button" id="displayDestinationBtn">Display selected destination</button>
+  <p id="destinationResult"></p>
+
+  <label for="movieInput">Program 3: Choose multiple movie genres: </label>
+  <input type="checkbox" name="genre" value="comedy"/>Comedy
+  <input type="checkbox" name="genre" value="action"/>Action
+  <input type="checkbox" name="genre" value="horror"/>Horror
+  <button type="button" id="displayGenreBtn">Display selected genres</button>
+  <p id="genreResult"></p>
+
+  <label for="foodInput">Program 4: Choose multiple items from a restaurant menu: </label>
+  <input type="checkbox" name="food" value="pasta"/>Pasta
+  <input type="checkbox" name="food" value="Pizza"/>Pizza
+  <input type="checkbox" name="food" value="burger"/>Burger
+  <button type="button" id="displayFoodBtn">Display selected items</button>
+  <p id="foodResult"></p>
+
+  <label for="fruitInput">Program 5: Choose multiple fruits: </label>
+  <input type="checkbox" name="fruits" value="apple"/>Apple
+  <input type="checkbox" name="fruits" value="banana"/>Banana
+  <input type="checkbox" name="fruits" value="strawberry"/>Strawberry
+  <button type="button" id="displayFruitsBtn">Display selected fruits</button>
+  <p id="fruitsResult"></p>
+
+  <script>
+    const sports = document.getElementsByName("sports")
+    const displaySportsBtn = document.getElementById("displaySportsBtn")
+    const sportsResult = document.getElementById("sportsResult")
+    displaySportsBtn.addEventListener("click", function(){
+    const selectedSports = []
+    for(let i = 0; i < sports.length; i++){
+      if(sports[i].checked){        selectedSports.push(sports[i].value)
+      }
+    }
+    sportsResult.textContent = `Selected sports: ${selectedSports}`
+    })
+
+    const places = document.getElementsByName("places")
+    const displayDestinationBtn = document.getElementById("displayDestinationBtn")
+    const destinationResult = document.getElementById("destinationResult")
+    displayDestinationBtn.addEventListener("click", function(){
+      const selectedPlaces = []
+      for(let i = 0; i < places.length; i++){
+        if(places[i].checked){        selectedPlaces.push(places[i].value)
+        }
+      }
+      destinationResult.textContent = `Selected sports: ${selectedPlaces}`
+      })
+
+    const genre = document.getElementsByName("genre")
+    const displayGenreBtn = document.getElementById("displayGenreBtn")
+    const genreResult = document.getElementById("genreResult")
+    displayGenreBtn.addEventListener("click", function(){
+      const selectedGenre = []
+      for(let i = 0; i < genre.length; i++){
+        if(genre[i].checked){
+          selectedGenre.push(genre[i].value)
+        }
+      }
+      genreResult.textContent = `Selected Genre: ${selectedGenre}`
+    })
+
+    const foodItems = document.getElementsByName("food")
+    const displayFoodBtn = document.getElementById("displayFoodBtn")
+    const foodResult = document.getElementById("foodResult")
+    displayFoodBtn .addEventListener("click", function(){
+      const selectedFood = []
+      for(let i = 0; i < foodItems.length; i++){
+        if(foodItems[i].checked){
+          selectedFood.push(foodItems[i].value)
+        }
+      }
+      foodResult.textContent = `Selected menu items: ${selectedFood}`
+    })
+
+    const fruits = document.getElementsByName("fruits")
+    const displayFruitsBtn = document.getElementById("displayFruitsBtn")
+    const fruitsResult = document.getElementById("fruitsResult")
+    displayFruitsBtn.addEventListener("click", function(){
+      const selectedFruits = []
+      for(let i = 0; i < fruits.length; i++) {
+        if(fruits[i].checked) {
+          selectedFruits.push(fruits[i].value)
+        }
+      }
+      fruitsResult.textContent = `Selected fruits: ${selectedFruits}`
+    })
+  </script>
+</body>
+
+</html>

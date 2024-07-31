@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <label for="optInCheckbox">Select checkbox to opt-in:</label>
+  <br/>
+  <input type="checkbox" id="optInCheckbox"/>Opt-In
+  <p id="optInResult"></p>
+
+  <label>Choose Pizza Toppings:</label>
+  <br/>
+  <input type="checkbox" name="toppings" value="Pepporoni"/>Pepporoni
+  <input type="checkbox" name="toppings" value="Olives"/>Olives
+  <input type="checkbox" name="toppings" value="Mushroom"/>Mushroom
+  <p id="toppingsResult"></p>
+
+  <label>Choose your preferred programming language:</label>
+  <br/>
+  <input type="checkbox" name="languages" value="Javascript"/>Javascript
+  <input type="checkbox" name="languages" value="Python"/>Python
+  <input type="checkbox" name="languages" value="Java"/>Java
+  <p id="languageResult"></p>
+
+  <script>
+    const optInCheckbox = document.getElementById("optInCheckbox")
+    const optInResult = document.getElementById("optInResult")
+    optInCheckbox.addEventListener("change", function(){
+      if(optInCheckbox.checked) {
+        optInResult.textContent = `You are subscribed.`
+      }
+      else{
+        optInResult.textContent = ``
+      }
+    })
+
+    const toppings = document.getElementsByName("toppings")
+    const toppingsResult = document.getElementById("toppingsResult")
+    console.log("....", toppings)
+    for(let i = 0; i < toppings.length; i++){      
+      toppings[i].addEventListener("change", function(){
+        const selectedToppings = []
+        for(let j = 0; j < toppings.length; j++){
+          if(toppings[j].checked){
+            selectedToppings.push(toppings[j].value)
+          }
+        }
+        toppingsResult.textContent = `Selected Toppings: ${selectedToppings.join(", ")}`
+      })
+    }
+
+    const languages = document.getElementsByName("languages")
+    const languageResult = document.getElementById("languageResult")
+    for(let i = 0; i < languages.length; i++){
+      languages[i].addEventListener("change", function(){
+        const selectedLanguages = []
+        for(let j = 0; j < languages.length; j++){
+          if(languages[j].checked){
+            selectedLanguages.push(languages[j].value)
+          }
+          languageResult.textContent = `Selected languages: ${selectedLanguages.join(", ")}`
+        }
+      })
+    }
+    
+  </script>
+</body>
+
+</html>

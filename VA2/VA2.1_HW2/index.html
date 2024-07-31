@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <label for="termsInput">Program 1: Tick the checkbox below to agree to the terms:</label>
+  <br/>
+  <input type="checkbox" id="termsInput"/>I agree to the terms and conditions
+  <p id="termsResult"></p>
+
+  <label for="allergyInput">Program 2: Select multiple food allergies:</label>
+  <input type="checkbox" name="allergy" value="dairy"/>Dairy
+  <input type="checkbox" name="allergy" value="nuts"/>Nuts
+  <input type="checkbox" name="allergy" value="gluten"/>Gluten
+  <button id="displayAllergyBtn" type="button">Display selected food allergy</button>
+  <p id="allergyResult"></p>
+
+  <label for="destinationInput">Program 3: Select multiple travel destination:</label>
+  <input type="checkbox" name="destination" value="rome"/>Rome
+  <input type="checkbox" name="destination" value="bali"/>Bali
+  <input type="checkbox" name="destination" value="sydney"/>Sydney
+  <button id="displayDestinationBtn" type="button">Display selected travel destination</button>
+  <p id="destinationResult"></p>
+
+  <label for="sportInput">Program 4: Select multiple sports:</label>
+  <input type="checkbox" name="sports" value="soccer"/>Soccer
+  <input type="checkbox" name="sports" value="basketball"/>Basketball
+  <input type="checkbox" name="sports" value="football"/>Football
+  <button id="displaySportsBtn" type="button">Display selected sports</button>
+  <p id="sportsResult"></p>
+
+  <label for="clothigColorInput">Program 5: Choose multiple clothing colors:</label>
+  <input type="checkbox" name="clothingColor" value="black"/>Black
+  <input type="checkbox" name="clothingColor" value="white"/>White
+  <input type="checkbox" name="clothingColor" value="blue"/>Blue
+  <button id="displayClothingColorBtn" type="button">Display selected clothing color</button>
+  <p id="clothingColorResult"></p>
+
+  <label for="mediaInput">Program 6: Choose multiple social media platforms:</label>
+  <input type="checkbox" name="media" value="twitter"/>Twitter
+  <input type="checkbox" name="media" value="instagram"/>Instagram
+  <input type="checkbox" name="media" value="facebook"/>Facebook
+  <button id="displayMediaBtn" type="button">Display selected social media platform</button>
+  <p id="mediaResult"></p>
+  
+  <script>
+    const termsInput = document.getElementById("termsInput")
+    const termsResult = document.getElementById("termsResult")
+    termsInput.addEventListener("change", function(){
+      if(termsInput.checked){
+        termsResult.textContent = `User agreed to terms`
+      }
+      else{
+        termsResult.textContent = ``
+      }
+    })
+
+    const allergies = document.getElementsByName("allergy")
+    const displayAllergyBtn = document.getElementById("displayAllergyBtn")
+    const allergyResult = document.getElementById("allergyResult")                
+    displayAllergyBtn.addEventListener("click", function(){ 
+      let selectedAllergyCount = 0 
+      const selectedAllergies = []
+      for(let i = 0; i < allergies.length; i++){      
+        if(allergies[i].checked){
+          selectedAllergies.push(allergies[i].value)
+            selectedAllergyCount += 1
+        }
+        allergyResult.textContent = `Selected food allergies: ${selectedAllergies.join(", ")}`
+      }
+      if(selectedAllergyCount === 0){
+         allergyResult.textContent = `Please select atleast one food allergy`
+      }
+    })    
+
+    const destinations = document.getElementsByName("destination")
+    const displayDestinationBtn = document.getElementById("displayDestinationBtn")
+    const destinationResult = document.getElementById("destinationResult")
+    displayDestinationBtn.addEventListener("click", function(){
+      let selectedDestinationCount = 0
+      const selectedDestination = []
+      for(let i = 0; i < destinations.length; i++) {
+        if(destinations[i].checked){
+          selectedDestination.push(destinations[i].value)
+          selectedDestinationCount += 1
+        }
+      }
+      if(selectedDestinationCount > 0) {
+        destinationResult.textContent = `Selected travel destination: ${selectedDestination}`
+      }
+      else {
+        destinationResult.textContent = `Please select atleast one travel destination`
+      }
+    })
+
+    const sports = document.getElementsByName("sports")
+    const displaySportsBtn = document.getElementById("displaySportsBtn")
+    const sportsResult = document.getElementById("sportsResult")
+    displaySportsBtn.addEventListener("click", function(){
+      const selectedSports = []
+      let sportsCount = 0
+      for(let i = 0; i < sports.length; i++){
+        if(sports[i].checked){
+          selectedSports.push(sports[i].value)
+          sportsCount += 1
+        }
+      }
+      if(sportsCount > 0){
+        sportsResult.textContent = `Selected sports: ${selectedSports}`
+      }
+      else{
+        sportsResult.textContent = `Please select atleast one sports`
+      }
+    })
+
+    const clothingColor = document.getElementsByName("clothingColor")
+    const displayClothingColorBtn = document.getElementById("displayClothingColorBtn")
+    const clothingColorResult = document.getElementById("clothingColorResult")
+    displayClothingColorBtn.addEventListener("click", function(){
+      const selectedClothingColor = []
+      let clothingColorCount = 0
+      for(let i = 0; i < clothingColor.length; i++){
+        if(clothingColor[i].checked){
+          selectedClothingColor.push(clothingColor[i].value)
+          clothingColorCount += 1
+        }
+      }
+      if(clothingColorCount > 0){
+        clothingColorResult.textContent = `Selected clothing color: ${selectedClothingColor}`
+      }
+      else{
+        clothingColorResult.textContent = `Please select atleast one clothing color`
+      }
+    })
+
+    const media = document.getElementsByName("media")
+    const displayMediaBtn = document.getElementById("displayMediaBtn")
+    const mediaResult = document.getElementById("mediaResult")
+    displayMediaBtn.addEventListener("click", function(){
+      const selectedMedia = []
+      let mediaCount = 0
+      for(let i = 0; i < media.length; i++){
+        if(media[i].checked){
+          selectedMedia.push(media[i].value)
+          mediaCount += 1
+        }
+      }
+      if(mediaCount > 0){
+        mediaResult.textContent = `Selected social media platform: ${selectedMedia}`
+      }
+      else{
+        mediaResult.textContent = `Please select atleast one social media platform`
+      }
+    })
+      
+  </script>
+</body>
+
+</html>
