@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Food Database</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+
+  <body>
+    <header class="bg-dark">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand text-light" href="index.html">Food Database</a>
+          <button type="button" class="navbar-toggler bg-body-tertiary" data-bs-toggle="collapse" data-bs-target="#collapsibleElement">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="collapsibleElement" class="navbar collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link text-light" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link text-light" href="dishes.html">Dishes</a></li>
+              <li class="nav-item"><a class="nav-link text-light" href="report.html">Food Report</a></li>
+              <li class="nav-item"><a class="nav-link text-light" href="tips.html">Cooking Tips</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>      
+    </header>
+
+    <main class="container">
+      <h2 class="py-2">Food Details</h2>
+      <section>
+        <div id="dishDetail" class="card">        
+        </div>
+      </section>
+    </main>
+
+    <script>
+      let recipes = [
+        {
+          id: "1",
+          name: "Pizza",
+          cuisine: "Italian",
+          ingredients: "Dough, tomato sauce, cheese, toppings",
+          details: "A delicious Italian dish with a variety of toppings."
+        },
+        {
+          id: "2",
+          name: "Sushi",
+          cuisine: "Japanese",
+          ingredients: "Seaweed, rice, fish, vegetables",
+          details: "Prepared with vinegared rice and a wide range of ingredients."
+        },
+        {
+          id: "3",
+          name: "Tacos",
+          cuisine: "Mexican",
+          ingredients: "Tortilla wrap, salsa, meat, toppings",
+          details: "Traditional Mexican dish consisting of a small hand-sized corn- or wheat-based tortilla topped with a filling."
+        },
+        {
+          id: "4",
+          name: "Rendang",
+          cuisine: "Indonesian",
+          ingredients: "Meat, coconut milk, spices",
+          details: "The dish is stewed for a few hours which gives it a tender texture and exotic taste."
+        },
+        {
+          id: "5",
+          name: "Masala Dosa",
+          cuisine: "Indian",
+          ingredients: "Batter, potato, chutney, sambhar",
+          details: "The dish looks like a crepe and the main ingredients are black gram and rice."
+        },
+        {
+          id: "6",
+          name: "Paella",
+          cuisine: "Spain",
+          ingredients: "White rice with green beans, meat, butterbeans, seasoning such as rosemary",
+          details: "Paella has got its roots in Valencia, Spain. Cooked in olive oil in a pan, the dish is full of flavours and hence one of the best dishes in the world."
+        },
+        {
+          id: "7",
+          name: "Hamburger",
+          cuisine: "Germany",
+          ingredients: "Meat, sliced bread or a bun",
+          details: "These mouth-watering delicacy today usually features at fast-food chan and is often the go-to meal of the youngsters."
+        },
+        {
+          id: "8",
+          name: "Biryani",
+          cuisine: "Indian",
+          ingredients: "Meat, rice, spices",
+          details: "This dish is especially popular throughout the Indian subcontinent, as well as among the diaspora from the region."
+        }
+      ]
+
+      function getParameterById() {
+        let url = new URL(window.location.href)
+        return url.searchParams.get("id")
+      }
+
+      let recipe;
+      let recipeId = getParameterById()
+      for(let i = 0; i < recipes.length; i++) {
+        if (recipeId === recipes[i].id) {
+          recipe = recipes[i]
+        }
+      }
+      
+      let dishDetailElement = document.getElementById("dishDetail")
+      if(recipe) {
+        dishDetailElement.innerHTML = `
+        <div class="card-body">
+          <h3 class="card-title">${recipe.name}</h3>
+          <p class="card-text"><strong>Cuisine: </strong>${recipe.cuisine}</P>
+          <p class="card-text"><strong>Ingredients: </strong>${recipe.ingredients}</P>
+          <p class="card-text"><strong>Details: </strong>${recipe.details}</P>
+        </div>`
+      }
+      else {
+        dishDetailElement.innerHTML = `<div class="card-body"><p>Sorry!!! No records Found.</p></div>`
+      }
+    </script>
+  </body>
+</html>

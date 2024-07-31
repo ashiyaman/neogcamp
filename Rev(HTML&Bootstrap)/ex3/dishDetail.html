@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Food Database</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Food Database</a>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dishes.html">Dishes</a></li>
+          <li><a href="report.html">Food Report</a></li>
+          <li><a href="tips.html">Cooking Tips</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Food Details</h2>
+      <section id="dishDetail"></section>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 Company Name. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      let recipes = [
+        {
+          id: "1",
+          name: "Pizza",
+          cuisine: "Italian",
+          ingredients: "Dough, tomato sauce, cheese, toppings",
+          details: "A delicious Italian dish with a variety of toppings."
+        },
+        {
+          id: "2",
+          name: "Sushi",
+          cuisine: "Japanese",
+          ingredients: "Seaweed, rice, fish, vegetables",
+          details: "Prepared with vinegared rice and a wide range of ingredients."
+        },
+        {
+          id: "3",
+          name: "Tacos",
+          cuisine: "Mexican",
+          ingredients: "Tortilla wrap, salsa, meat, toppings",
+          details: "Traditional Mexican dish consisting of a small hand-sized corn- or wheat-based tortilla topped with a filling."
+        },
+        {
+          id: "4",
+          name: "Rendang",
+          cuisine: "Indonesian",
+          ingredients: "Meat, coconut milk, spices",
+          details: "The dish is stewed for a few hours which gives it a tender texture and exotic taste."
+        },
+        {
+          id: "5",
+          name: "Masala Dosa",
+          cuisine: "Indian",
+          ingredients: "Batter, potato, chutney, sambhar",
+          details: "The dish looks like a crepe and the main ingredients are black gram and rice."
+        },
+        {
+          id: "6",
+          name: "Paella",
+          cuisine: "Spain",
+          ingredients: "White rice with green beans, meat, butterbeans, seasoning such as rosemary",
+          details: "Paella has got its roots in Valencia, Spain. Cooked in olive oil in a pan, the dish is full of flavours and hence one of the best dishes in the world."
+        },
+        {
+          id: "7",
+          name: "Hamburger",
+          cuisine: "Germany",
+          ingredients: "Meat, sliced bread or a bun",
+          details: "These mouth-watering delicacy today usually features at fast-food chan and is often the go-to meal of the youngsters."
+        },
+        {
+          id: "8",
+          name: "Biryani",
+          cuisine: "Indian",
+          ingredients: "Meat, rice, spices",
+          details: "This dish is especially popular throughout the Indian subcontinent, as well as among the diaspora from the region."
+        }
+      ]
+
+      function getParameterById() {
+        let url = new URL(window.location.href)
+        return url.searchParams.get("id")
+      }
+
+      let recipe;
+      let recipeId = getParameterById()
+      for(let i = 0; i < recipes.length; i++) {
+        if (recipeId === recipes[i].id) {
+          recipe = recipes[i]
+        }
+      }
+      
+      let dishDetailElement = document.getElementById("dishDetail")
+      if(recipe) {
+        dishDetailElement.innerHTML = `
+          <h3>${recipe.name}</h3>
+          <p><strong>Cuisine: </strong>${recipe.cuisine}</P>
+          <p><strong>Ingredients: </strong>${recipe.ingredients}</P>
+          <p><strong>Details: </strong>${recipe.details}</P>`
+      }
+      else {
+        dishDetailElement.innerHTML = `<p>Sorry!!! No records Found.</p>`
+      }
+    </script>
+  </body>
+</html>

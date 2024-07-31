@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel Database - Destinations</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Travel Database</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="report.html">Travel Report</a></li>
+        <li><a href="tips.html">Travel Tips</a></li>
+      </ul>
+    </nav>
+  </header>  
+
+  <main>
+    <h2>Travel Details</h2>
+    <section id="destinationDetail"></section>
+  </main>
+
+  <script>
+    let destinations = [{
+      id: "1",
+      name: "Paris",
+      duration: "7 days",
+      highlights: "Eiffel Tower, Lourve Museum",
+      details: "A wonderful trip to the romantic city of Paris."
+    },
+    {
+      id: "2",
+      name: "Tokyo",
+      duration: "5 days",
+      highlights: "Tokyo Tower, Meiji Shrine",
+      details: "High rise, fast-paced and neon-lit, Tokyo is as futuristic as it is historical."
+    },
+    {
+      id: "3",
+      name: "Rome",
+      duration: "6 days",
+      highlights: " Colosseum, Vatican City",
+      details: "From the Colosseum to the catacombs, and sprawling parks to virtual time travel, Rome promises a memorable trip for the whole family."
+    },
+    {
+      id: "4",
+      name: "New York City",
+      duration: "9 days",
+      highlights: "Statue of Liberty, Central Park",
+      details: "Discover NYC's vibrant sights, delectable cuisine and rich culture in one amazing package."
+    },
+    {
+      id: "5",
+      name: "Cape Town",
+      duration: "7 days",
+      highlights: "Table Mountain, Robben Island",
+      details: "Cape Town is a popular destination for Arts and Culture lovers, with a number of museums, traditional art galleries, and historical attractions to choose from."
+    },
+    {
+      id: "6",
+      name: "Sydney",
+      duration: "10 days",
+      highlights: "Opera House, Bondi Beach",
+      details: "Sydney is a place that's really got it all: It's a sunny, modern city, right smack in the middle of nature, where gallery-hopping, surfing, and fine dining."
+    },
+    {
+      id: "7",
+      name: "Brisbane",
+      duration: "10 days",
+      highlights: "Great Barrier Reef, Fraser Island",
+      details: "Blessed with an idyllic subtropical climate all year round, and everything from relaxation through to adventure, Brisbane seems to have it all."
+    }
+  ]
+    
+    function getParamById() {
+      let url = new URL(window.location.href)
+      return url.searchParams.get("id")
+    }
+
+    let destinationId = getParamById()
+    let place;
+    for(let i = 0; i < destinations.length; i++) {
+      if (destinationId === destinations[i].id) {
+        place = destinations[i]
+      }
+    }
+
+    let destinationDetailElement = document.getElementById("destinationDetail")
+    if(place) {
+      destinationDetailElement.innerHTML = `
+        <h4>${place.name}</h4>
+        <p><strong>Duration: </strong>${place.duration}</p>
+        <p><strong>Highlights: </strong>${place.highlights}</p>
+        <p><strong>Details: </strong>${place.details}</p>
+      `
+    }
+    else{
+      destinationDetailElement.innerHTML = `
+        <p>Sorry!! No records Found.</p>
+      `
+    }
+  </script>
+</body>
+</html>
