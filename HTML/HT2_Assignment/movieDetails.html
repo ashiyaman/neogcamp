@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Movie</title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html">Movie Database</a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="movies.html">Movies</a></li>
+          <li><a href="movieReport.html">Report</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Movie Details</h1>
+      <section id="movieDetail"></section>
+    </main>
+
+    <script>
+      let movies = [
+        {id: "1", name: "Movie 1", genre: "Drama", details: "Get ready for drama.", releaseDate: "2023-01-08", director: "Jane Walk"},
+        {id: "2", name: "Movie 2", genre: "Drama", details: "Get ready for action.", releaseDate: "2023-04-28", director: "John Austin"},
+        {id: "3", name: "Movie 3", genre: "Comedy", details: "Get ready to laugh with this comedy.", releaseDate: "2023-05-20", director: "Jane Walk"}
+      ] 
+
+      function getParameterById(id) {
+        let url = new URL(window.location.href)
+        return url.searchParams.get("id")
+      }
+
+      let movieId = getParameterById("id")
+      let movie;
+      for(let i = 0; i < movies.length; i++) {
+        if(movies[i].id === movieId) {
+          movie = movies[i]
+        }
+      }
+
+      let movieDetailElement = document.getElementById("movieDetail")
+      if(movie) {
+        movieDetailElement.innerHTML = `
+          <h2>${movie.name}</h2>
+          <p><strong>Genre: </strong>${movie.genre}</p>
+          <p><strong>Details: </strong>${movie.details}</p>
+          <p><strong>Release Date: </strong>${movie.releaseDate}</p>
+          <p><strong>Director: </strong>${movie.director}</p>`
+      }
+    </script>
+  </body>
+</html>

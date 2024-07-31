@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>Calorie Details</title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html">MyHealth</a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="calorie.html">Calories</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Calorie Details</h1>
+      <section id="calorieDetail"></section>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 My Health App. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      let meals = [
+        {id:"1", meal:"Breakfast", item:"Dosa", calories:"200Cal"},
+        {id:"2", meal:"Lunch", item:"Thali", calories:"350Cal"},
+        {id:"3", meal:"Dinner", item:"Roti with curry", calories:"270Cal"}
+      ]
+
+      function getMealById(id) {
+        let url = new URL(window.location.href)
+        return url.searchParams.get(id)
+      }
+
+      let meal;
+      let mealId = getMealById("id")
+      for(let i = 0; i < meals.length; i++) {
+        if(meals[i].id === mealId) {
+          meal = meals[i]
+        }
+      }
+
+      let mealDetailElement = document.getElementById("calorieDetail")
+      console.log(mealDetailElement)
+      if(meal) {
+        mealDetailElement.innerHTML = `
+        <h2>${meal.meal}</h2>
+        <ul>
+          <li>Meal: ${meal.meal}</li>
+          <li>Item: ${meal.item}</li>
+          <li>Calories: ${meal.calories}</li>
+        </ul>`
+      }
+      
+    </script>
+  </body>
+</html>
