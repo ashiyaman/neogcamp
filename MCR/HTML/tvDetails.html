@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TV Zone</title>
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="index.html">TV Zone</a></h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tv.html">TVs</a></li>
+          <li><a href="tvBrands.html">TV Brands</a></li>
+          <li><a href="report.html">Report</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1>TV Details</h1>
+      <section id="tvDetail">
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2023. TV Zone. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      let televisions = [
+        {
+          id: "1",
+          name: "Smart LED TV",
+          model: "LED123",
+          detail: "A feature-rich Smart LED TV with high-definition display.",
+          manufacturer: "TechVision",
+          year: 2022,
+          screenType: "LED",
+          size: 55,
+          resolution: "4K",
+          price: 80000,
+        },
+        {
+          id: "2",
+          name: "Curved OLED TV",
+          model: "OLED456",
+          detail: "Immersive entertainment with a curved OLED display.",
+          manufacturer: "VisionX",
+          year: 2023,
+          screenType: "OLED",
+          size: 65,
+          resolution: "8K",
+          price: 120000,
+        },
+        {
+          id: "3",
+          name: "Ultra HD QLED TV",
+          model: "QLED789",
+          detail: "QLED technology for vibrant colors and superior clarity.",
+          manufacturer: "ColorTech",
+          year: 2021,
+          screenType: "QLED",
+          size: 75,
+          resolution: "4K",
+          price: 150000,
+        },
+      ]
+
+      function getParameter(id) {
+        let url = new URL(window.location.href)
+        return url.searchParams.get(id)
+      }
+
+      let tv;
+      let tvId = getParameter("id")
+      for(let i = 0; i < televisions.length; i++) {
+        if(tvId === televisions[i].id) {
+          tv = televisions[i]
+        }
+      }
+      
+      let tvDetailElement = document.getElementById("tvDetail")
+      tvDetailElement.innerHTML = `
+        <h2>${tv.name}</h2>
+        <ul>
+          <li>Model: ${tv.model}</li>
+          <li>Detail: ${tv.detail}</li>
+          <li>Manufacturer: ${tv.manufacturer}</li>
+          <li>Screen Type: ${tv.screenType}</li>
+          <li>Resolution: ${tv.resolution}</li>
+          <li>Year: ${tv.year}</li>
+          <li>Price: Rs.${tv.price}</li>
+        </ul>`
+    </script>
+  </body>
+
+</html>
