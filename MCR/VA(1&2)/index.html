@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MCR(VA1&2)</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Library User Form</h1>
+  <form id="libraryForm">
+    <label for="cardNumber"><strong>Library Card Number: </strong></label><br>
+    <input type="text" id="cardNumber"/><br><br>
+    <label for="name"><strong>Full Name: </strong></label><br>
+    <input type="text" id="name"/><br><br>
+    <label for="pnoneNumber"><strong>Phone Number: </strong></label><br>
+    <input type="number" id="phoneNumber"/><br><br>
+    <label for="email"><strong>Email: </strong></label><br>
+    <input type="email" id="email"/><br><br>
+    <label for="gender"><strong>Gender: </strong></label><br>
+    <label><input type="radio" name="gender" value="Male"/>Male</label><br>
+    <label><input type="radio" name="gender" value="Female"/>Female</label><br>
+    <label><input type="radio" name="gender" value="Other"/>Other</label><br><br>
+    <label for="address"><strong>Address: </strong></label><br>
+    <textarea id="address" cols="50" rows="5"></textarea><br><br>
+    <label for="membershipType"><strong>Membership Type: </strong></label><br>
+    <select id="membershipType">
+      <option value="Student">Student</option>
+      <option value="Faculty">Faculty</option>
+      <option value="General Public">General Public</option>
+    </select><br><br>
+    <label for="genreInterests"><strong>Genre Interests: </strong></label><br>
+    <label><input type="checkbox" name="genre" value="Fiction"/>Fiction</label><br>
+    <label><input type="checkbox" name="genre" value="Non-Fiction"/>Non-Fiction</label><br>
+    <label><input type="checkbox" name="genre" value="Self-Help"/>Self-Help</label><br>
+    <label><input type="checkbox" name="genre" value="Biography"/>Biography</label><br>
+    <label><input type="checkbox" name="genre" value="Mystery Thriller"/>Mystery Thriller</label><br>
+    <label><input type="checkbox" name="genre" value="Poetry"/>Poetry</label><br>
+    <label><input type="checkbox" name="genre" value="Others"/>Others</label><br><br>
+    <input type="submit" value="Submit Details"/>
+  </form>
+  <div id="userDetailsContainer"></div>
+
+  <script>
+    const libraryForm = document.querySelector("#libraryForm")
+    libraryForm.addEventListener("submit", function(e){
+      e.preventDefault()
+      const cardNumber = document.querySelector("#cardNumber").value
+      const name = document.querySelector("#name").value
+      const phoneNumber = document.querySelector("#phoneNumber").value
+      const email = document.querySelector("#email").value
+      const gender = document.querySelector('input[name="gender"]:checked').value
+      const address = document.querySelector("#address").value
+      const membershipType = document.querySelector("#membershipType").value
+      
+      const genreInterests = document.querySelectorAll('input[name="genre"]:checked')
+      const selectedGenreInterests = []
+      for(let i = 0; i < genreInterests.length; i++){
+        selectedGenreInterests.push(genreInterests[i].value)
+      }
+       console.log(cardNumber, name, phoneNumber, email, gender, address, membershipType, selectedGenreInterests)
+
+      const userDetailsContainer = document.querySelector("#userDetailsContainer")
+      userDetailsContainer.innerHTML = `
+        <h2>User Details</h2>
+        <p><strong>Library Card Number: </strong>${cardNumber}</p>
+        <p><strong>Full Name: </strong>${name}</p>
+        <p><strong>Phone Number: </strong>${phoneNumber}</p>
+        <p><strong>Email: </strong>${email}</p>
+        <p><strong>Gender: </strong>${gender}</p>
+        <p><strong>Address: </strong>${address}</p>
+        <p><strong>Membership Type: </strong>${membershipType}</p>
+        <p><strong>Genre Interests: </strong>${selectedGenreInterests.join(", ")}</p>
+      `
+    })
+  </script>
+
+</body>
+
+</html>
