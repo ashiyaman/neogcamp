@@ -23,7 +23,6 @@
             return response.json();
           })
           .then(function (data) {
-            console.log(data);
             if (data) {
               moviesList.textContent = ``;
               for (let i = 0; i < data.length; i++) {
