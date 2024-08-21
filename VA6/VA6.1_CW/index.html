@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Student List</h1>
+    <ul id="studentsList"></ul>
+
+    <script>
+      const studentsList = document.querySelector("#studentsList");
+      const apiURL =
+        "https://student-management-student-neog.replit.app/students";
+
+      function fetchData() {
+        studentsList.textContent = `Loading...`;
+        fetch(apiURL)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              studentsList.textContent = ``;
+              for (let i = 0; i < data.length; i++) {
+                const liElement = document.createElement("li");
+                liElement.textContent = `
+                ${data[i].name} - ${data[i].grade}
+              `;
+                studentsList.appendChild(liElement);
+              }
+            }
+          })
+          .catch(function (error) {
+            studentsList.textContent = `An error occured while fetching data.`;
+          });
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>
