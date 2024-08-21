@@ -72,7 +72,6 @@
             return response.json();
           })
           .then(function (data) {
-            console.log(data);
             if (data) {
               for (let i = 0; i < data.length; i++) {
                 let currentMovie = data[i];
@@ -106,7 +105,12 @@
                 `;
                 getMovieContainer.appendChild(liElement);
               }
+            } else {
+              getMovieContainer.textContent = `Sorry! Failed to get data.`;
             }
+          })
+          .catch(function (error) {
+            getMovieContainer.textContent = `An error occured while fetching data.`;
           });
       });
 
@@ -151,7 +155,12 @@
           .then(function (data) {
             if (data) {
               addMovieContainer.textContent = `Movie added successfully.`;
+            } else {
+              addMovieContainer.textContent = `Sorry! Unable to add movie. Try again!`;
             }
+          })
+          .catch(function (error) {
+            addMovieContainer.textContent = `An error failed while fetching data.`;
           });
       });
     </script>
