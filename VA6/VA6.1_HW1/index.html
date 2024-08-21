@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Movie List</h1>
+    <ul id="moviesList"></ul>
+
+    <script>
+      const moviesList = document.querySelector("#moviesList");
+      const apiURL =
+        "https://va-5-assignment-express-student-neog.replit.app/movies";
+
+      function fetchData() {
+        moviesList.textContent = `Loading...`;
+        fetch(apiURL)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data);
+            if (data) {
+              moviesList.textContent = ``;
+              for (let i = 0; i < data.length; i++) {
+                const liElement = document.createElement("li");
+                liElement.textContent = `
+                  ${data[i].title} - ${data[i].language} - ${data[i].rating} - ${data[i].director}
+                `;
+                moviesList.appendChild(liElement);
+              }
+            }
+          });
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>
