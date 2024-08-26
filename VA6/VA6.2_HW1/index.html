@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <style>
+      #loadingContainer {
+        display: none;
+      }
+      #successContainer {
+        display: none;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="py-2">Add Movie</h1>
+      <form id="addMovieForm">
+        <label for="title">Title:</label><br />
+        <input id="title" class="form-control" /><br />
+        <label for="releaseYear">Release Year:</label><br />
+        <input id="releaseYear" class="form-control" /><br />
+        <label for="genre">Genre:</label><br />
+        <select id="genre" class="form-select">
+          <option class="bg-dark text-light">Action</option>
+          <option class="bg-dark text-light">Drama</option>
+          <option class="bg-dark text-light">Comedy</option>
+          <option class="bg-dark text-light">Thriller</option>
+          <option class="bg-dark text-light">Sci-Fi</option>
+          <option class="bg-dark text-light">Fantasy</option>
+          <option class="bg-dark text-light">Musical</option>
+          <option class="bg-dark text-light">Other</option></select
+        ><br />
+        <label for="director">Director:</label><br />
+        <input type="text" id="director" class="form-control" /><br />
+        <label for="language">Language:</label><br />
+        <input type="text" id="language" class="form-control" /><br />
+        <label for="country">Country:</label><br />
+        <select id="country" class="form-select">
+          <option class="bg-dark text-light" value="india">India</option>
+          <option class="bg-dark text-light">USA</option>
+          <option class="bg-dark text-light">UK</option></select
+        ><br />
+        <label for="rating">Rating:</label><br />
+        <input type="text" id="rating" class="form-control" /><br />
+        <label for="plot">Plot:</label><br />
+        <textarea id="plot" class="form-control"></textarea><br />
+        <label for="awards">Awards:</label><br />
+        <input type="text" id="awards" class="form-control" /><br />
+        <label for="posterURL">Poster URL:</label><br />
+        <input type="text" id="posterURL" class="form-control" /><br />
+        <label for="trailerURL">Trailer URL:</label><br />
+        <input type="text" id="trailerURL" class="form-control" /><br />
+        <input type="submit" value="Add Movie" class="btn btn-primary" />
+      </form>
+      <div id="loadingContainer" class="my-2">Loading...</div>
+      <div id="successContainer" class="my-2">Movie Added successfully.</div>
+    </div>
+
+    <script>
+      const addMovieForm = document.querySelector("#addMovieForm");
+      const loadingContainer = document.querySelector("#loadingContainer");
+      const successContainer = document.querySelector("#successContainer");
+      const apiURL =
+        "https://va-5-assignment-express-student-neog.replit.app/movies";
+
+      addMovieForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        loadingContainer.style.display = "block";
+
+        const title = document.querySelector("#title").value;
+        const year = document.querySelector("#releaseYear").value;
+        const genre = document.querySelector("#genre").value;
+        const director = document.querySelector("#director").value;
+        const language = document.querySelector("#language").value;
+        const country = document.querySelector("#country").value;
+        const rating = document.querySelector("#rating").value;
+        const plot = document.querySelector("#plot").value;
+        const awards = document.querySelector("#awards").value;
+        const posterURL = document.querySelector("#posterURL").value;
+        const trailerURL = document.querySelector("#trailerURL").value;
+
+        const requestData = {
+          title: title,
+          year: year,
+          genre: genre,
+          director: director,
+          language: language,
+          country: country,
+          rating: rating,
+          plot: plot,
+          awards: awards,
+          posterURL: posterURL,
+          trailerURL: trailerURL,
+        };
+
+        fetch(apiURL, {
+          method: "POST",
+          body: JSON.stringify(requestData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              loadingContainer.style.display = "none";
+              successContainer.style.display = "block";
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
