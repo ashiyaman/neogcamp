@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="container">
+    <h1 class="my-2">Movie List</h1>
+    <ul id="moviesList" class="row"></ul>
+    <div id="successMsgContainer"></div>
+
+    <script>
+      const moviesList = document.querySelector("#moviesList");
+      const successMsgContainer = document.querySelector(
+        "#successMsgContainer"
+      );
+      const apiURL =
+        "https://va-5-assignment-express-student-neog.replit.app/movies";
+
+      function fetchData() {
+        moviesList.textContent = `Loading...`;
+        fetch(apiURL)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              moviesList.textContent = ``;
+              successMsgContainer.textContent = ``;
+              for (let i = 0; i < data.length; i++) {
+                const liElement = document.createElement("li");
+                liElement.className = "col-md-12 my-2";
+                liElement.innerHTML = `
+                  ${data[i].title} - Release Year: ${data[i].releaseYear} - Genre: ${data[i].genre}
+                    <button id="deleteBtn" class="btn btn-danger float-end" data-id=${data[i]._id}>Delete</button>
+
+                  `;
+                moviesList.appendChild(liElement);
+              }
+
+              const deleteButtons = document.querySelectorAll("#deleteBtn");
+              for (let i = 0; i < deleteButtons.length; i++) {
+                deleteButtons[i].addEventListener("click", function (event) {
+                  const movieId = event.target.getAttribute("data-id");
+                  const deleteURL = `${apiURL}/${movieId}`;
+                  fetch(deleteURL, {
+                    method: "DELETE",
+                  })
+                    .then(function (response) {
+                      return response.json();
+                    })
+                    .then(function (data) {
+                      if (data) {
+                        successMsgContainer.textContent = `Movie deleted successfully.`;
+                        fetchData();
+                      } else {
+                        successMsgContainer.textContent = `Sorry! Couldn't delete movie.`;
+                      }
+                    })
+                    .catch(function () {
+                      successMsgContainer.textContent = `An error occured while fetching movie.`;
+                    });
+                });
+              }
+            }
+          });
+      }
+      fetchData();
+    </script>
+  </body>
+</html>
