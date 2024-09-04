@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <header class="bg-light">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html">Inventory Management</a>
+          <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleElement"
+            aria-controls="collapsibleElement"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="collapsibleElement" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="itemList.html" class="nav-link">Item List</a>
+              </li>
+              <li class="nav-item">
+                <a href="addItems.html" class="nav-link">Add Items</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <section class="bg-info">
+        <div class="p-5">
+          <h1 class="fs-1 fw-normal">Welcome to Inventory Management</h1>
+          <p class="fs-5">
+            Efficiently manage your inventory with our simple inventory
+            management system.
+          </p>
+          <hr />
+          <p>Explore the features using the navigation links above.</p>
+        </div>
+      </section>
+      <section class="my-3">
+        <h2>Inventory List</h2>
+        <p>View and maintain the list of items in your system.</p>
+        <a href="itemList.html" class="btn btn-info">Inventory List</a>
+      </section>
+      <section class="my-3">
+        <h2>Add Items</h2>
+        <p>Add a new item to the system with necessary details.</p>
+        <a href="addItems.html" class="btn btn-info">Add Items</a>
+      </section>
+    </main>
+  </body>
+</html>

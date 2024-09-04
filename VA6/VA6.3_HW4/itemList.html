@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <header class="bg-light">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html">Inventory Management</a>
+          <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleElement"
+            aria-controls="collapsibleElement"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="collapsibleElement" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="itemList.html" class="nav-link">Item List</a>
+              </li>
+              <li class="nav-item">
+                <a href="addItems.html" class="nav-link">Add Items</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="my-3">Item List</h1>
+      <label for="categoryFilter" class="mt-3">Filter By Category:</label><br />
+      <select id="categoryFilter" class="form-select mb-3">
+        <option value="All" class="bg-dark text-light">All</option>
+        <option value="Perishable" class="bg-dark text-light">
+          Perishable
+        </option>
+        <option value="Non-Perishable" class="bg-dark text-light">
+          Non-Perishable
+        </option>
+      </select>
+      <ul id="inventoryList" class="list-group my-3"></ul>
+      <div id="successMsgContainer" class="my-3"></div>
+    </main>
+
+    <script>
+      const categoryFilter = document.querySelector("#categoryFilter");
+      const inventoryList = document.querySelector("#inventoryList");
+      const successMsgContainer = document.querySelector(
+        "#successMsgContainer"
+      );
+      const apiURL = `https://inventory-management-student-neog-ca.replit.app/inventory`;
+      let inventories = [];
+
+      function displayData(inventoryData) {
+        inventoryList.textContent = ``;
+        successMsgContainer.textContent = ``;
+
+        for (let i = 0; i < inventoryData.length; i++) {
+          const liElement = document.createElement("li");
+          liElement.className = "list-group-item";
+          liElement.innerHTML = `
+              ${inventoryData[i].itemName} - Quantity: ${inventoryData[i].quantity} - Category: ${inventoryData[i].category}
+              <button id="deleteBtn" data-id=${inventoryData[i]._id} class="btn btn-danger float-end align-middle">Delete</button>
+          `;
+          inventoryList.appendChild(liElement);
+        }
+
+        const deleteButtons = document.querySelectorAll("#deleteBtn");
+        for (let i = 0; i < deleteButtons.length; i++) {
+          deleteButtons[i].addEventListener("click", function (event) {
+            event.preventDefault();
+            const inventoryId = deleteButtons[i].getAttribute("data-id");
+            const deleteURL = `${apiURL}/${inventoryId}`;
+            fetch(deleteURL, {
+              method: "DELETE",
+            })
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (data) {
+                if (data) {
+                  successMsgContainer.textContent = `Inventory detail deleted successfully.`;
+                  fetchData();
+                } else {
+                  successMsgContainer.textContent = `Sorry! Unable to delete inventory detail.`;
+                }
+              })
+              .catch(function () {
+                successMsgContainer.textContent = `An error occurred while deleting inventory detail.`;
+              });
+          });
+        }
+      }
+
+      categoryFilter.addEventListener("change", function () {
+        const selectedCategory = categoryFilter.value;
+        const filteredInventories = [];
+        if (selectedCategory === "All") {
+          displayData(inventories);
+        } else {
+          for (let i = 0; i < inventories.length; i++) {
+            if (inventories[i].category === selectedCategory) {
+              filteredInventories.push(inventories[i]);
+            }
+          }
+          displayData(filteredInventories);
+        }
+      });
+
+      function fetchData() {
+        fetch(apiURL)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              if (data.length > 0) {
+                console.log("ini data...", data);
+                inventories = data;
+                console.log(inventories);
+                displayData(inventories);
+              } else {
+                successMsgContainer.textContent = `No inventory list to display. Please add some.`;
+              }
+            } else {
+              inventoryList.textContent = `Sorry! Unable to fetch inventory list.`;
+            }
+          })
+          .catch(function () {
+            inventoryList.textContent = `An error occurred while fetching inventory list.`;
+          });
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>
