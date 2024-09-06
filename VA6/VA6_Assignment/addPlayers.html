@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <header class="bg-light">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html">ICC Player Management</a>
+          <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleElement"
+            aria-controls="collapsibleElement"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            id="collapsibleElement"
+            class="collapse navbar-collapse flex-row-reverse"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="playersList.html" class="nav-link">Players List</a>
+              </li>
+              <li class="nav-item">
+                <a href="addPlayers.html" class="nav-link">Add Players</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="container my-3">
+      <h2>Add Players</h2>
+      <form id="addPlayerForm" class="my-2">
+        <label for="fullName">Player Full Name:</label><br />
+        <input type="text" id="fullName" class="form-control" /><br />
+        <label for="dob">Date Of Birth:</label><br />
+        <input type="date" id="dob" class="form-control" /><br />
+        <label for="nationality">Nationality:</label><br />
+        <input type="text" id="nationality" class="form-control" /><br />
+        <label for="birthPlace">Place Of Birth:</label><br />
+        <input type="text" id="birthPlace" class="form-control" /><br />
+        <label for="address">Contact Address:</label><br />
+        <textarea id="address" class="form-control" rows="6"></textarea><br />
+        <label for="phoneNumber">Phone Number:</label><br />
+        <input type="number" id="phoneNumber" class="form-control" /><br />
+        <label for="email">Email Address:</label><br />
+        <input type="email" id="email" class="form-control" /><br />
+        <label for="role">Playing Role:</label><br />
+        <select id="role" class="form-select">
+          <option class="bg-dark text-light" value="Batsman">Batsman</option>
+          <option class="bg-dark text-light" value="Bowler">Bowler</option>
+          <option class="bg-dark text-light" value="All-Rounder">
+            All-Rounder
+          </option></select
+        ><br />
+        <label for="battingHand">Batting Hand:</label><br />
+        <select id="battingHand" class="form-select">
+          <option class="bg-dark text-light" value="Right Handed">
+            Right Handed
+          </option>
+          <option class="bg-dark text-light" value="Left Handed">
+            Left Handed
+          </option>
+          <option class="bg-dark text-light" value="Both">Both</option></select
+        ><br />
+        <label for="bowlingStyle">Bowling Style:</label><br />
+        <select id="bowlingStyle" class="form-select">
+          <option class="bg-dark text-light" value="Right-Arm Fast">
+            Right-Arm Fast
+          </option>
+          <option class="bg-dark text-light" value="Left-Arm Fast">
+            Left-Arm Fast
+          </option>
+          <option class="bg-dark text-light" value="Right-Arm Medium">
+            Right-Arm Medium
+          </option>
+          <option class="bg-dark text-light" value="Left-Arm Medium">
+            Left-Arm Medium
+          </option>
+          <option class="bg-dark text-light" value="Right-Arm Spin (Off-Spin)">
+            Right-Arm Spin (Off-Spin)
+          </option>
+          <option class="bg-dark text-light" value="Left-Arm Spin (Off-Spin)">
+            Left-Arm Spin (Off-Spin)
+          </option></select
+        ><br />
+        <input type="submit" class="btn btn-primary my-2" value="Add Player" />
+      </form>
+      <div id="successMsgContainer" class="my-3"></div>
+    </main>
+
+    <script>
+      const addPlayerForm = document.querySelector("#addPlayerForm");
+      const fullName = document.querySelector("#fullName");
+      const dob = document.querySelector("#dob");
+      const nationality = document.querySelector("#nationality");
+      const birthPlace = document.querySelector("#birthPlace");
+      const address = document.querySelector("#address");
+      const phoneNumber = document.querySelector("#phoneNumber");
+      const email = document.querySelector("#email");
+      const role = document.querySelector("#role");
+      const battingHand = document.querySelector("#battingHand");
+      const bowlingStyle = document.querySelector("#bowlingStyle");
+      const successMsgContainer = document.querySelector(
+        "#successMsgContainer"
+      );
+      const apiURL = `https://players-backend-student-neog-ca.replit.app/players`;
+
+      addPlayerForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const requestData = {
+          fullName: fullName.value,
+          dateOfBirth: dob.value,
+          nationality: nationality.value,
+          birthPlace: birthPlace.value,
+          address: address.value,
+          phoneNumber: phoneNumber.value,
+          email: email.value,
+          playingRole: role.value,
+          battingHand: battingHand.value,
+          bowlingStyle: bowlingStyle.value,
+        };
+        fetch(apiURL, {
+          method: "POST",
+          body: JSON.stringify(requestData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              successMsgContainer.textContent = `Player added successfully.`;
+            } else {
+              successMsgContainer.textContent = `Sorry! Couldn't add player. Please try again.`;
+            }
+          })
+          .catch(function () {
+            successMsgContainer.textContent = `An error occured while adding player. Please try again.`;
+          });
+      });
+    </script>
+  </body>
+</html>
