@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--
+      Need a visual blank slate?
+      Remove all code in `styles.css`!
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html">Laptop Store</a>
+          <button
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleElement"
+            aria-controls="collapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="collapsibleElement" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="laptops.html">Laptops</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="report.html">Report</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1>Laptop Details</h1>
+      <div id="laptopDetailContainer"></div>
+    </main>
+
+    <script>
+      const laptops = [
+        {
+          id: 1,
+          brand: 'Dell',
+          model: 'Inspiron 15',
+          details: 'Powerful performance in a sleek design.',
+          laptopImg:
+            'https://placehold.co/300x200/EFEFEFF/grey?text=Dell%20Inspiron%2015',
+          processor: 'Intel Core i7',
+          RAM: '16GB',
+          storage: '512GB SSD',
+          price: 1200,
+        },
+        {
+          id: 2,
+          brand: 'HP',
+          model: 'Pavilion x360',
+          details:
+            'Versatile 2-in-1 laptop for productivity and entertainment.',
+          laptopImg:
+            'https://placehold.co/300x200/EFEFEFF/grey?text=HP%20Pavilion%20x360',
+          processor: 'AMD Ryzen 5',
+          RAM: '8GB',
+          storage: '256GB SSD',
+          price: 900,
+        },
+        {
+          id: 3,
+          brand: 'Lenovo',
+          model: 'ThinkPad X1 Carbon',
+          details: 'Ultra-lightweight and durable business laptop.',
+          laptopImg:
+            'https://placehol.co/300x200/EFEFEFF/grey?text=Lenovo%20ThinkPad%20X1%20Carbon',
+          processor: 'Intel Core i5',
+          RAM: '8GB',
+          storage: '256GB SSD',
+          price: 1500,
+        },
+      ];
+      const laptopDetailContainer = document.querySelector(
+        '#laptopDetailContainer'
+      );
+
+      function getId() {
+        const url = new URL(window.location.href);
+        return url.searchParams.get('id');
+      }
+
+      const laptopId = parseInt(getId());
+      let laptop;
+      for (let i = 0; i < laptops.length; i++) {
+        if (laptopId === laptops[i].id) {
+          laptop = laptops[i];
+        }
+      }
+
+      if (laptop) {
+        const heading = `${laptop.brand}+${laptop.model}`;
+        laptopDetailContainer.className = 'card col-md-8';
+        laptopDetailContainer.innerHTML = `
+          <div class="card-body">
+            <img src="https://placehold.co/300x150?text=${heading}"/>
+            <h5 class="mt-3">${heading}</h5>
+            <p><strong>Details: </strong>${laptop.details}</p>
+            <p><strong>RAM: </strong>${laptop.RAM}</p>
+            <p><strong>Processor: </strong>${laptop.processor}</p>
+            <p><strong>Storage: </strong>${laptop.storage}</p>
+          </div>
+        `;
+      }
+    </script>
+  </body>
+</html>

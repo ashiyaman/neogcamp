@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Laptop Store</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--
+      Need a visual blank slate?
+      Remove all code in `styles.css`!
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html">Laptop Database</a>
+          <button
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleElement"
+            aria-controls="collapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="collapsibleElement" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="laptops.html">Laptops</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="report.html">Report</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1>List of Laptops</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="brandFilter">Filter By Brand:</label><br />
+          <select id="brandFilter" class="form-select">
+            <option class="bg-dark text-light" value="All">All Brands</option>
+            <option class="bg-dark text-light" value="Dell">Dell</option>
+            <option class="bg-dark text-light" value="HP">HP</option>
+            <option class="bg-dark text-light" value="Lenovo">Lenovo</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="priceFilter">Filter By Prices:</label><br />
+          <select id="priceFilter" class="form-select">
+            <option class="bg-dark text-light" value="All">All Prices</option>
+            <option class="bg-dark text-light" value="1000">
+              $1000 and under
+            </option>
+            <option class="bg-dark text-light" value="2000">
+              $2000 and under
+            </option>
+          </select>
+        </div>
+      </div>
+      <div id="laptopList"></div>
+    </main>
+
+    <script>
+      const laptops = [
+        {
+          id: 1,
+          brand: 'Dell',
+          model: 'Inspiron 15',
+          details: 'Powerful performance in a sleek design.',
+          laptopImg:
+            'https://placehold.co/300x200/EFEFEFF/grey?text=Dell%20Inspiron%2015',
+          processor: 'Intel Core i7',
+          RAM: '16GB',
+          storage: '512GB SSD',
+          price: 1200,
+        },
+        {
+          id: 2,
+          brand: 'HP',
+          model: 'Pavilion x360',
+          details:
+            'Versatile 2-in-1 laptop for productivity and entertainment.',
+          laptopImg:
+            'https://placehold.co/300x200/EFEFEFF/grey?text=HP%20Pavilion%20x360',
+          processor: 'AMD Ryzen 5',
+          RAM: '8GB',
+          storage: '256GB SSD',
+          price: 900,
+        },
+        {
+          id: 3,
+          brand: 'Lenovo',
+          model: 'ThinkPad X1 Carbon',
+          details: 'Ultra-lightweight and durable business laptop.',
+          laptopImg:
+            'https://placehol.co/300x200/EFEFEFF/grey?text=Lenovo%20ThinkPad%20X1%20Carbon',
+          processor: 'Intel Core i5',
+          RAM: '8GB',
+          storage: '256GB SSD',
+          price: 1500,
+        },
+      ];
+
+      const brandFilter = document.querySelector('#brandFilter');
+      const priceFilter = document.querySelector('#priceFilter');
+      const laptopList = document.querySelector('#laptopList');
+
+      brandFilter.addEventListener('change', function () {
+        filterList('brand', brandFilter.value);
+      });
+
+      priceFilter.addEventListener('change', function () {
+        filterList('price', priceFilter.value);
+      });
+
+      function fetchData(totalLaptop) {
+        laptopList.innerHTML = ``;
+        for (let i = 0; i < totalLaptop.length; i++) {
+          const card = document.createElement('div');
+          card.className = 'card col-md-6 my-2';
+          card.innerHTML = `
+            <div class="card-header">
+              <h3>${totalLaptop[i].brand} ${totalLaptop[i].model}</h3>
+            </div>
+            <div class="card-body">
+              <p><strong>Price: </strong>${totalLaptop[i].price}</p>
+              <a class="btn btn-primary" href="laptopDetails.html?id=${totalLaptop[i].id}">Details</a>
+            </div>
+          `;
+          laptopList.appendChild(card);
+        }
+      }
+
+      function filterList(item, itemValue) {
+        const filteredLaptopList = [];
+
+        if (item === 'brand') {
+          for (let i = 0; i < laptops.length; i++) {
+            if (itemValue === laptops[i].brand) {
+              filteredLaptopList.push(laptops[i]);
+              console.log(filteredLaptopList);
+            } else {
+              fetchData(laptops);
+            }
+          }
+        } else {
+          for (let i = 0; i < laptops.length; i++) {
+            console.log(laptops[i].price);
+            if (laptops[i].price < itemValue) {
+              filteredLaptopList.push(laptops[i]);
+            }
+          }
+        }
+        fetchData(filteredLaptopList);
+      }
+
+      fetchData(laptops);
+    </script>
+  </body>
+</html>
