@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--
+      Need a visual blank slate?
+      Remove all code in `styles.css`!
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <header class="bg-light">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand">Jobs Portal</a>
+          <button
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleElement"
+            aria-controls="collapsibleElement"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="collapsibleElement" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="jobs.html">Jobs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="report.html">Report</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="py-2">Jobs List</h1>
+      <section class="py-2 row">
+        <div class="col-md-6">
+          <label for="categoryFilter">Filter By Category:</label><br />
+          <select id="categoryFilter" class="form-select">
+            <option class="bg-dark text-light" value="All" selected>
+              All Categories
+            </option>
+            <option class="bg-dark text-light" value="IT">
+              Information Technology
+            </option>
+            <option class="bg-dark text-light" value="Finance">Finance</option>
+            <option class="bg-dark text-light" value="Marketing">
+              Marketing
+            </option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="locationFilter">Filter By Location:</label><br />
+          <select id="locationFilter" class="form-select">
+            <option class="bg-dark text-light" value="All" selected>
+              All Locations
+            </option>
+            <option class="bg-dark text-light" value="New York">
+              New York
+            </option>
+            <option class="bg-dark text-light" value="San Francisco">
+              San Francisco
+            </option>
+          </select>
+        </div>
+      </section>
+      <section class="py-2">
+        <div id="jobsList" class="row"></div>
+      </section>
+    </main>
+
+    <script>
+      const categoryFilter = document.querySelector('#categoryFilter');
+      const loactionFilter = document.querySelector('#locationFilter');
+      const jobsList = document.querySelector('#jobsList');
+
+      const jobs = [
+        {
+          id: 1,
+          title: 'Software Engineer',
+          category: 'IT',
+          location: 'New York',
+          postDate: '2023-01-15',
+          details: 'Job description for a software engineer.',
+        },
+        {
+          id: 2,
+          title: 'Financial Analyst',
+          category: 'Finance',
+          location: 'San Francisco',
+          postDate: '2023-02-20',
+          details: 'Job description for a financial analyst.',
+        },
+        {
+          id: 3,
+          title: 'Marketing Manager',
+          category: 'Marketing',
+          location: 'San Francisco',
+          postDate: '2023-04-05',
+          details: 'Job description for a marketing manager.',
+        },
+      ];
+
+      function displayJobs(totalJobs) {
+        jobsList.textContent = ``;
+
+        for (let i = 0; i < totalJobs.length; i++) {
+          const jobCard = document.createElement('div');
+          jobCard.className = 'col-md-6 my-2';
+          jobCard.innerHTML = `
+            <div class="card">
+              <div class="card-header">
+                <h4>${totalJobs[i].title}</h4>
+              </div>
+              <div class="card-body">
+                <p><strong>Category: </strong>${totalJobs[i].category}</p>
+                <p><strong>Location: </strong>${totalJobs[i].location}</p>
+                <p><strong>Post Date: </strong>${totalJobs[i].postDate}</p>
+                <a class="btn btn-primary" href="jobDetails.html?id=${totalJobs[i].id}">Details</a>
+              </div>
+            </div>
+          `;
+          jobsList.appendChild(jobCard);
+        }
+      }
+
+      function filteredList(filterTitle, filterValue) {
+        console.log(filterTitle, filterValue);
+        const filteredJobs = [];
+        if (filterValue === 'All') {
+          displayJobs(jobs);
+        } else {
+          for (let i = 0; i < jobs.length; i++) {
+            console.log(jobs[i][filterTitle]);
+            if (jobs[i][filterTitle] === filterValue) {
+              filteredJobs.push(jobs[i]);
+            }
+          }
+          displayJobs(filteredJobs);
+        }
+      }
+
+      categoryFilter.addEventListener('change', function () {
+        filteredList('category', categoryFilter.value);
+      });
+      locationFilter.addEventListener('change', function () {
+        filteredList('location', loactionFilter.value);
+      });
+
+      displayJobs(jobs);
+    </script>
+  </body>
+</html>
