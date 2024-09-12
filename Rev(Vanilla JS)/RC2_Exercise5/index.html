@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--
+      Need a visual blank slate?
+      Remove all code in `styles.css`!
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="my-3">Travel Destinations</h1>
+      <section class="my-4">
+        <h2>Get Destinations</h2>
+        <button id="getDestinationsBtn" class="btn btn-primary">
+          Get Destinations
+        </button>
+        <div id="destinationsList" class="row my-3"></div>
+      </section>
+      <section class="my-4">
+        <h2>Add Destination</h2>
+        <form id="addDestinationForm">
+          <label for="name">Name:</label><br />
+          <input type="text" id="name" class="form-control" /><br />
+          <label for="destination">Location:</label><br />
+          <input type="text" id="destination" class="form-control" /><br />
+          <label for="description">Description:</label><br />
+          <textarea id="description" class="form-control"></textarea><br />
+          <label for="rating">Rating:</label><br />
+          <input type="number" id="rating" class="form-control" /><br />
+          <input
+            type="submit"
+            value="Add Destination"
+            class="btn btn-success"
+          />
+        </form>
+        <div id="successMsgContainer" class="my-3"></div>
+      </section>
+    </main>
+
+    <script>
+      const getDestinationsBtn = document.querySelector('#getDestinationsBtn');
+      const destinationsList = document.querySelector('#destinationsList');
+      const addDestinationForm = document.querySelector('#addDestinationForm');
+      const name = document.querySelector('#name');
+      const destination = document.querySelector('#destination');
+      const description = document.querySelector('#description');
+      const rating = document.querySelector('#rating');
+      const successMsgContainer = document.querySelector(
+        '#successMsgContainer'
+      );
+      const apiURL = `https://tripy-express-student-neog.replit.app/destinations`;
+
+      getDestinationsBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        destinationsList.textContent = ``
+        successMsgContainer.textContent = ``
+        fetch(apiURL)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if(data){
+                if(data.length > 0){
+                    for(let i = 0; i < data.length; i++){
+                        const card = document.createElement("div")
+                        card.className = "col-md-12 card my-2"
+                        card.innerHTML = `
+                            <div class="card-body">
+                                <h3 class="card-title my-2">${data[i].name}</h3>
+                                <p><strong>Location: </strong>${data[i].location}</p>
+                                <p><strong>Description: </strong>${data[i].description}</p>
+                                <p><strong>Rating: </strong>${data[i].rating}</p>
+                            </div>  
+                        `   
+                        destinationsList.appendChild(card)                   
+                    }
+                }
+                else{
+                    destinationsList.textContent = `No destinations to display. Please add some.`
+                }
+            }
+            else{
+                destinationsList.textContent = `Sorry! Couldn't get destinations. Please try again.`
+            }
+          })
+          .catch(function () {
+            destinationsList.textContent = `An error occured while fetching destinations.`;
+          });
+      });
+
+      addDestinationForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const requestBody = {
+          name: name.value,
+          location: destination.value,
+          description: description.value,
+          rating: rating.value,
+        };
+
+        fetch(apiURL, {
+          method: 'POST',
+          body: JSON.stringify(requestBody),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if(data){
+                successMsgContainer.textContent = `Destination added successfully.`
+                addDestinationForm.reset()
+            }
+            else{
+                successMsgContainer.textContent = `Sorry! Couldn't add destination. Please try again.`
+            }
+          })
+          .catch(function () {
+            successMsgContainer.textContent = `An error occured while addind destination.`;
+          });
+      });
+    </script>
+  </body>
+</html>
