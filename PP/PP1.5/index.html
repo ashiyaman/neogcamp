@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Capitalize Words Program</h1>
+      <label>Enter a Sentence: </label><input type="text" id="sentenceInput"/><button id="capitalizeBtn">Capitalize Words</button>
+      <p id="resultContainer"></p>
+    </main>
+
+    <script>
+        const capitalizeBtn = document.querySelector("#capitalizeBtn")
+        const resultContainer = document.querySelector("#resultContainer")
+
+        capitalizeBtn.addEventListener("click", (event) => {
+            event.preventDefault()
+            resultContainer.textContent =  ``
+            const sentenceInput = document.querySelector("#sentenceInput").value
+
+            const wordCount = sentenceInput.split(" ")
+            if(wordCount.length < 4) {
+                for(const word of wordCount){
+                    resultContainer.textContent += word[0].toUpperCase() + word.substring(1) + " "
+                } 
+            }
+            else{
+                resultContainer.textContent = sentenceInput.charAt(0).toUpperCase() + sentenceInput.substring(1)
+            }
+             
+        })
+    </script>
+  </body>
+</html>

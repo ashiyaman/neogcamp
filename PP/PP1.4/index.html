@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Multiplication Table Generator</h1>
+      <p>Enter a number: <input type="text" id="tableNumber"/><button id="tableBtn">Generate Table</button></p>
+      <ul id="tableContainer"></ul>
+    </main>
+
+    <script>        
+        const tableBtn = document.querySelector("#tableBtn")
+        const tableContainer = document.querySelector("#tableContainer")
+
+        tableBtn.addEventListener("click", (event) => {
+            event.preventDefault()
+            tableContainer.textContent = ``
+            const tableNumber = document.querySelector("#tableNumber").value
+
+            for(let i = 1; i <= 12; i++){
+                const liElement = document.createElement("li")
+                liElement.textContent = `${tableNumber} * ${i} = ${tableNumber * i}`
+                tableContainer.appendChild(liElement)
+            }
+        })
+
+    </script>
+  </body>
+</html>

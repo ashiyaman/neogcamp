@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Fruit-Vegetable Classification</h1>
+      <h3>Classified Array:</h3>
+      <ul id="classifiedArrayList"></ul>
+    </main>
+
+    <script>
+      const classifiedArrayList = document.querySelector(
+        '#classifiedArrayList'
+      );
+
+      const classifyItems = ([...arr]) => {
+        for (const item of arr) {
+          return `<li>${item} - ${
+            item.length <= 6 ? 'Fruit' : 'Vegetable'
+          }</li>`;
+        }
+      };
+
+      classifiedArrayList.appendChild(
+        classifyItems([
+          'apple',
+          'drumstick',
+          'orange',
+          'sweet potato',
+          'kiwi',
+          'cauliflower',
+          'grape',
+          'pear',
+          'bottle gourd',
+          'snake gourd',
+        ])
+      );
+    </script>
+  </body>
+</html>

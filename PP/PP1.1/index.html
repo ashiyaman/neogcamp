@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PP1.1</title>
+  </head>
+  <body>
+    <h1>FizzBuzz Program Output</h1>
+    <ul id="numberList"></ul>
+
+    <script>
+      const numberList = document.querySelector('#numberList');
+      for (let i = 1; i <= 20; i++) {
+        let num = 0;
+        if (i % 3 === 0 && i % 5 === 0) {
+          num = 'FizzBuzz';
+        } else if (i % 3 === 0) {
+          num = 'Fizz';
+        } else if (i % 5 === 0) {
+          num = 'Buzz';
+        } else {
+          num = i;
+        }
+        const liElement = document.createElement('li');
+        liElement.textContent = num;
+        numberList.appendChild(liElement);
+      }
+    </script>
+  </body>
+</html>

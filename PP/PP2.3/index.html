@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PP2.3</title>
+    </head>
+    <body>
+        <button id="increaseCount1">Increment Count 1</button>
+        <button id="increaseCount2">Increment Count 2</button>
+        <p>Count 1: <span id="counter1"></span></p>
+        <p>Count 2: <span id="counter2"></span></p>
+
+        <script>
+            const increaseCount1 = document.querySelector("#increaseCount1")
+            const increaseCount2 = document.querySelector("#increaseCount2")
+            const counter1 = document.querySelector("#counter1")
+            const counter2 = document.querySelector("#counter2")
+            let count1 = 0
+            let count2 = 0
+
+            const increaseCounter = (counter, num) => {
+                
+                num === 1 ? count1 += 1 : count2 += 1
+                counter.textContent = num === 1 ? count1 : count2
+            }
+
+            increaseCount1.addEventListener("click", () => increaseCounter(counter1, 1))
+            increaseCount2.addEventListener("click", () => increaseCounter(counter2, 2))
+        </script>
+    </body>
+</html>

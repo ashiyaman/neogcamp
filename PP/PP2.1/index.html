@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PP 2.1</title>
+    </head>
+    <body>
+        <main>
+            <div>
+                <label>Enter Color: </label>
+                <input type="text" id="colorCode" placeholder="#00ff00"/>
+                <button id="changeColor1Btn">Change Color Section 1</button>
+                <button id="changeColor2Btn">Change Color Section 2</button>
+            </div>
+            <div id="msgContainer"></div>
+            <div>
+                <div id="section1">Section 1</div>
+                <div id="section2">Section 2</div>
+            </div>
+        </main>
+
+        <script>
+            const colorCode = document.querySelector("#colorCode")
+            const changeColor1Btn = document.querySelector("#changeColor1Btn")
+            const changeColor2Btn = document.querySelector("#changeColor2Btn")
+            const msgContainer = document.querySelector("#msgContainer")
+            const section1 = document.querySelector("#section1")
+            const section2 = document.querySelector("#section2")
+
+            function changeColor(section) {
+                section.style.backgroundColor = "none"
+                msgContainer.textContent = ``
+                colorCode.value !== "" ? (section.style.backgroundColor = colorCode.value) : (msgContainer.textContent = `Invalid color format. Please enter a valid color.(eg.00ff00)`)                
+            }
+
+            changeColor1Btn.addEventListener("click", () => changeColor(section1))
+            changeColor2Btn.addEventListener("click", () => changeColor(section2))
+        </script>
+    </body>
+</html>

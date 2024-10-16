@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PP2.3</title>
+    </head>
+    <body>
+        <button id="decreaseCount1">Decrement Count 1</button>
+        <button id="decreaseCount2">Decrement Count 2</button>
+        <p>Count 1: <span id="counter1">20</span></p>
+        <p>Count 2: <span id="counter2">20</span></p>
+        <p>Total Count: <span id="totalCounter">40</span></p>
+
+        <script>
+            const decreaseCount1 = document.querySelector("#decreaseCount1")
+            const decreaseCount2 = document.querySelector("#decreaseCount2")
+            const counter1 = document.querySelector("#counter1")
+            const counter2 = document.querySelector("#counter2")
+            const totalCounter = document.querySelector("#totalCounter")
+            let count1 = 20
+            let count2 = 20
+            let totalCount = 40
+
+            const decreaseCounter = (counter, num) => {                
+                num === 1 ? count1 -= 1 : count2 -= 1
+                counter.textContent = num === 1 ? count1 : count2
+                totalCount -= 1
+                totalCounter.textContent = totalCount
+            }
+
+            decreaseCount1.addEventListener("click", () => decreaseCounter(counter1, 1))
+            decreaseCount2.addEventListener("click", () => decreaseCounter(counter2, 2))
+        </script>
+    </body>
+</html>
