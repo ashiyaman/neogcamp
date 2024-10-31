@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Movie List</h1>
+      <div>
+        <label for="All"
+          ><input type="radio" id="All" name="genre" value="All" />All</label
+        >
+        <label for="Action"
+          ><input
+            type="radio"
+            id="Action"
+            name="genre"
+            value="Action"
+          />Action</label
+        >
+        <label for="Drama"
+          ><input
+            type="radio"
+            id="Drama"
+            name="genre"
+            value="Drama"
+          />Drama</label
+        >
+        <label for="Comedy"
+          ><input
+            type="radio"
+            id="Comedy"
+            name="genre"
+            value="Comedy"
+          />Comedy</label
+        >
+      </div>
+      <ul id="movieList"></ul>
+    </main>
+  </body>
+</html>
