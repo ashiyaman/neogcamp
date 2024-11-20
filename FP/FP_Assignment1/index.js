@@ -38,6 +38,7 @@ const movies = [
   { title: 'The Shawshank Redemption', genre: 'Drama' },
   { title: 'The Dark Knight', genre: 'Action' },
 ];
+const genre = movies.map(movie => movie.genre)
 
 //Increase the dimensions by 10% using .map()
 const furnitures = [
