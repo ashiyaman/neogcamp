@@ -41,8 +41,8 @@ const GetFormattedDate = () => {
 export default function App() {
   return (
     <>
-      <MathOperations />
       <CallGreetingFunction />
+      <MathOperations />
       <GetFormattedDate />
     </>
   );

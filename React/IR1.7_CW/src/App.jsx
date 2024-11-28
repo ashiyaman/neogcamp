@@ -30,7 +30,7 @@ const TicketPricing = ({ passengerAge }) => {
 export default function App() {
   return (
     <>
-      <Message isLoggedIn={false} />
+      <Message isLoggedIn={true} />
       <Greeting isMorning={true} />
       <ShowNotification notification="Notofication Message" />
       <TicketPricing passengerAge={70} />
